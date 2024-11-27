@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.6)
+set(CMAKE_CXX_STANDARD 11)
+project(graphics_files)
+AUX_SOURCE_DIRECTORY(/home/vagrant/project/cplusplus/Cplusplus/ownTest/graphics/files DIR_SRCS)
+include_directories(/home/vagrant/project/cplusplus/Cplusplus/ownTest/graphics/files)
+add_executable(main DIR_SRCS)

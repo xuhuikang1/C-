@@ -1,47 +1,56 @@
 #include <iostream>
 #include <string>
+
+
 using namespace std;
-class book{
-    private:
-        string name;
-        string author;
-        string publisher;
-        string publishDate;
-        string ISBN;
-        bool   isBorrow;
-    public:
-        book(){};
-        book(string n,string a,string p,string pd,string i,bool iB):
-            name(n),author(a),publisher(p),publishDate(pd),ISBN(i),isBorrow(iB){};
-        string getInfo(){
-            string bookInfo;
-            string iB = isBorrow ? "true":"false";
-            bookInfo += "name: "+name+" author: "+author+" publisher: "+ publisher+" publishDate: "+publishDate+" ISBN: "+ISBN+" isBorrow: "+iB;
-            return bookInfo;
+
+
+using std::string;
+
+
+
+
+class Book {
+public:
+    Book(){};
+    Book(string n,string a,string p,string pd,string i,bool iB):
+        name(n),author(a),publisher(p),publishDate(pd),ISBN(i),isBorrow(iB){};
+    string getInfo() {
+        string bookInfo;
+        string iB = isBorrow ? "true":"false";
+        bookInfo += "name: "+name+" author: "+author+" publisher: "+ publisher+" publishDate: "+publishDate+" ISBN: "+ISBN+" isBorrow: "+iB;
+        return bookInfo;
+    }
+    string getISBN(){
+        return ISBN;
+    }
+    bool borrowBook(){
+        if(!isBorrow){
+            isBorrow=true;
+            return true;
+        } else {
+            return false;
         }
-        string getISBN(){
-            return ISBN;
+    }
+    bool returnBook(){
+        if(isBorrow){
+            isBorrow=false;
+            return true;
+        } else {
+            return false;
         }
-        bool borrowBook(){
-            if(!isBorrow){
-                isBorrow=true;
-                return true;
-            } else {
-                return false;
-            }
-        }
-        bool returnBook(){
-            if(isBorrow){
-                isBorrow=false;
-                return true;
-            } else {
-                return false;
-            }
-        }
+    }
+private:
+    string name;
+    string author;
+    string publisher;
+    string publishDate;
+    string ISBN;
+    bool   isBorrow;
 };
 
 int main(){
-    book bookList[1000];
+    Book bookList[1000];
     int capacity=1000;
     while(true){
         int operation;
@@ -67,7 +76,7 @@ int main(){
                     isBorrow=false;
                     std::cout  << "请输入书籍信息(名称 作者 出版商 出版日期 ISBN号):" << endl;
                     cin >> name >> author >> publisher >> publishDate >> ISBN;
-                    book newBook(name,author,publisher,publishDate,ISBN,isBorrow);
+                    Book newBook(name,author,publisher,publishDate,ISBN,isBorrow);
                     bookList[1000-capacity]=newBook;
                     capacity--;
                 }
@@ -129,6 +138,9 @@ int main(){
             case 5:{
                 isBreak=true;
                 break;
+            }
+            default: {
+                // 
             }
         }
         if(isBreak){
